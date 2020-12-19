@@ -1,0 +1,68 @@
+<div class="col-md-6">
+  <div class="row">
+    <div class="col-sm-4 from-group">
+      <h4>Thân</h4>
+      <label for="diameter">Đường kính</label>
+      <input type="number" id="diameter" class="form-control" />
+      <label for="weight">Trọng lượng</label>
+      <input type="number" id="weight" class="form-control" />
+      <hr />
+      <label for="diameterL">Loại</label>
+      <div class="checkbox">
+        <label>
+          <input
+            type="checkbox"
+            name="xiMang"
+            [(ngModel)]="isChecked_xi"
+            (change)="checkValue($event)"
+          />
+          Xi măng
+        </label>
+      </div>
+      <div class="checkbox">
+        <label>
+          <input
+            type="checkbox"
+            name="troBay"
+            [(ngModel)]="isChecked_tro"
+            (change)="checkValue($event)"
+          />
+          Tro bay
+        </label>
+      </div>
+      <button class="btn btn-success" type="submit">Tiếp</button>
+    </div>
+
+    <div class="col-sm-4 from-group">
+      <h4>Cone</h4>
+      <label for="diameterL">Đường kính lơn:</label>
+      <input type="number" id="diameterL" class="form-control" />
+      <label for="diameterS">Đường kính nhở</label>
+      <input type="number" id="diameterS" class="form-control" />
+      <label for="height">Chiều cao</label>
+      <input type="number" id="height" value="1.5m" class="form-control" />
+    </div>
+  </div>
+</div>
+<div class="col-md-6">
+  <h4>Khoang</h4>
+  <hr />
+  <div class="row">
+    <div class="col-sm-2">
+      <label for="khoangN">Số khoang</label>
+    </div>
+    <div class="col-sm-4">
+      <label for="height">Chiều cao</label>
+    </div>
+    <div class="col-sm-4">
+      <label for="quyCach">Quy cách </label>
+    </div>
+  </div>
+
+  <app-khoang></app-khoang>
+  <app-khoang></app-khoang>
+  <app-khoang></app-khoang>
+  <app-khoang></app-khoang>
+  <app-khoang></app-khoang>
+  <app-khoang></app-khoang>
+</div>
