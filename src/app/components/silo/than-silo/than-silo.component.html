@@ -1,13 +1,31 @@
-<div class="col-md-6">
+<div class="row">
+  <div class="col-md-12">
+    <div class="col-sm-5">
+      <h3>Than silo</h3>
+    </div>
+  </div>
+</div>
+<div class="col-md-5">
   <div class="row">
-    <div class="col-sm-4 from-group">
+    <div class="col-sm-6 from-group">
       <h4>Thân</h4>
-      <label for="diameter">Đường kính</label>
-      <input type="number" id="diameter" class="form-control" />
-      <label for="weight">Trọng lượng</label>
-      <input type="number" id="weight" class="form-control" />
+      <label for="diameter">Đường kính (mm):</label>
+      <input
+        type="number"
+        [(ngModel)]="diameter"
+        id="diameter"
+        class="form-control"
+      />
+
+      <label for="weight">Trọng lượng (kg):</label>
+      <input
+        type="number"
+        [(ngModel)]="weight"
+        id="weight"
+        class="form-control"
+      />
       <hr />
-      <label for="diameterL">Loại</label>
+      <label for="type">Loại</label>
       <div class="checkbox">
         <label>
           <input
@@ -30,21 +48,50 @@
           Tro bay
         </label>
       </div>
-      <button class="btn btn-success" type="submit">Tiếp</button>
+      <button class="btn btn-success" (click)="onNext()" type="submit">
+        Tiếp
+      </button>
     </div>
 
-    <div class="col-sm-4 from-group">
+    <div class="col-sm-6 from-group">
       <h4>Cone</h4>
-      <label for="diameterL">Đường kính lơn:</label>
-      <input type="number" id="diameterL" class="form-control" />
-      <label for="diameterS">Đường kính nhở</label>
-      <input type="number" id="diameterS" class="form-control" />
-      <label for="height">Chiều cao</label>
-      <input type="number" id="height" value="1.5m" class="form-control" />
+      <label for="height">Chiều cao (mm):</label>
+      <input
+        type="number"
+        id="height"
+        [(ngModel)]="cone.height"
+        class="form-control"
+      />
+      <label for="diameterS">Đường kính nho (mm):</label>
+      <input
+        type="number"
+        id="diameterS"
+        value="{{ cone.diameterS }}"
+        class="form-control"
+      />
+      <label for="diameterL">Đường kính lơn (mm):</label>
+      <input
+        type="number"
+        id="diameterL"
+        value="{{ diameter }}"
+        [disabled]="true"
+        class="form-control"
+      />
+      <hr />
+      <div class="row">
+        <div class="col-sm-12">
+          <div *ngIf="cone.volume && totalVolume && khoangVolume">
+            <p>Tổng thể tich: {{ totalVolume }}<span> kg/&#13219;</span></p>
+            <p>Cone thể tich: {{ cone.volume }} <span>kg/&#13219;</span></p>
+            <p>Khoang thể tich: {{ khoangVolume }}<span> kg/&#13219;</span></p>
+            <p>Chiều cao thân: {{ totalKhoangHeight }} mm</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-<div class="col-md-6">
+<div class="col-md-7">
   <h4>Khoang</h4>
   <hr />
   <div class="row">
@@ -55,14 +102,19 @@
       <label for="height">Chiều cao</label>
     </div>
     <div class="col-sm-4">
-      <label for="quyCach">Quy cách </label>
+      <label for="thickness">Độ dầy</label>
     </div>
   </div>
 
-  <app-khoang></app-khoang>
-  <app-khoang></app-khoang>
-  <app-khoang></app-khoang>
-  <app-khoang></app-khoang>
-  <app-khoang></app-khoang>
-  <app-khoang></app-khoang>
+  <div class="row">
+    <div class="col-sm-2">
+      <label for="khoangN">Khoang : </label>
+    </div>
+    <div class="col-sm-4">
+      <input type="number" id="height" class="form-control" />
+    </div>
+    <div class="col-sm-4">
+      <input type="number" id="thickness" class="form-control" />
+    </div>
+  </div>
 </div>
