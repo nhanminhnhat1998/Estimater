@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
+import { Khoang } from "../../../../model/Khoang.model";
 
 @Component({
   selector: "app-khoang",
@@ -6,7 +7,7 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./khoang.component.css"],
 })
 export class KhoangComponent implements OnInit {
-  khoangNumber = 1;
+  @Input() khoang: Khoang;
   constructor() {}
 
   ngOnInit(): void {}
