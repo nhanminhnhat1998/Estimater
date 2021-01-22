@@ -3,6 +3,6 @@ export class Khoang {
     public thickness: number,
     public height: number,
     public idx: number,
-    public weight: number
+    public mass: number
   ) {}
 }

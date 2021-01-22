@@ -1,11 +1,21 @@
 <div class="row">
   <div class="col-sm-2">
-    <label for="khoangN">Khoang {{ khoangNumber }}: </label>
+    <label for="khoangN">Khoang {{ khoang.idx }}: </label>
   </div>
   <div class="col-sm-4">
-    <input type="number" id="height" class="form-control" />
+    <input
+      type="number"
+      id="height"
+      [(ngModel)]="khoang.height"
+      class="form-control"
+    />
   </div>
   <div class="col-sm-4">
-    <input type="number" id="thickness" class="form-control" />
+    <input
+      type="number"
+      id="thickness"
+      [(ngModel)]="khoang.thickness"
+      class="form-control"
+    />
   </div>
 </div>

@@ -12,7 +12,7 @@
       <label for="diameter">Đường kính (mm):</label>
       <input
         type="number"
-        [(ngModel)]="diameter"
+        [(ngModel)]="siloBody.diameter"
         id="diameter"
         class="form-control"
       />
@@ -20,7 +20,7 @@
       <label for="weight">Trọng lượng (kg):</label>
       <input
         type="number"
-        [(ngModel)]="weight"
+        [(ngModel)]="siloBody.weight"
         id="weight"
         class="form-control"
       />
@@ -34,7 +34,7 @@
             [(ngModel)]="isChecked_xi"
             (change)="checkValue($event)"
           />
-          Xi măng
+          Xi măng <span> - {{ xiMang }} kg/&#13221;</span>
         </label>
       </div>
       <div class="checkbox">
@@ -45,7 +45,7 @@
             [(ngModel)]="isChecked_tro"
             (change)="checkValue($event)"
           />
-          Tro bay
+          Tro bay <span> - {{ troBay }} kg/&#13221;</span>
         </label>
       </div>
       <button class="btn btn-success" (click)="onNext()" type="submit">
@@ -59,39 +59,51 @@
       <input
         type="number"
         id="height"
-        [(ngModel)]="cone.height"
+        [(ngModel)]="siloBody.cone.height"
         class="form-control"
       />
       <label for="diameterS">Đường kính nho (mm):</label>
       <input
         type="number"
         id="diameterS"
-        value="{{ cone.diameterS }}"
+        value="{{ siloBody.cone.diameterS }}"
         class="form-control"
       />
       <label for="diameterL">Đường kính lơn (mm):</label>
       <input
         type="number"
         id="diameterL"
-        value="{{ diameter }}"
+        value="{{ siloBody.diameter }}"
         [disabled]="true"
         class="form-control"
       />
       <hr />
       <div class="row">
         <div class="col-sm-12">
-          <div *ngIf="cone.volume && totalVolume && khoangVolume">
-            <p>Tổng thể tich: {{ totalVolume }}<span> kg/&#13219;</span></p>
-            <p>Cone thể tich: {{ cone.volume }} <span>kg/&#13219;</span></p>
-            <p>Khoang thể tich: {{ khoangVolume }}<span> kg/&#13219;</span></p>
-            <p>Chiều cao thân: {{ totalKhoangHeight }} mm</p>
+          <div *ngIf="siloBody.cone.volume && totalVolume && khoangVolume">
+            <p>
+              <strong> Tổng thể tich:</strong> {{ totalVolume
+              }}<span> &#13221;</span>
+            </p>
+            <p>
+              <strong> Cone thể tich:</strong> {{ siloBody.cone.volume }}
+              <span>&#13221;</span>
+            </p>
+            <p>
+              <strong>Khoang thể tich:</strong> {{ khoangVolume
+              }}<span> &#13221;</span>
+            </p>
+            <p><strong>Chiều cao thân:</strong> {{ totalKhoangHeight }} m</p>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<div class="col-md-7">
+<div
+  class="col-md-7"
+  *ngIf="siloBody.cone.volume && totalVolume && khoangVolume"
+>
   <h4>Khoang</h4>
   <hr />
   <div class="row">
@@ -99,22 +111,66 @@
       <label for="khoangN">Số khoang</label>
     </div>
     <div class="col-sm-4">
-      <label for="height">Chiều cao</label>
+      <label for="height">Chiều cao (mm)</label>
+    </div>
+    <div class="col-sm-3">
+      <label for="thickness">Độ dầy (mm)</label>
+    </div>
+    <div class="col-sm-3">
+      <label for="weight">Khối lương (kg)</label>
+    </div>
+  </div>
+  <hr />
+  <div class="row" *ngFor="let k of siloBody.khoang">
+    <div class="col-sm-2">
+      <label for="khoangN">Khoang {{ k.idx }}: </label>
     </div>
     <div class="col-sm-4">
-      <label for="thickness">Độ dầy</label>
+      <input
+        type="number"
+        id="height"
+        [disabled]="true"
+        [(ngModel)]="k.height"
+        class="form-control"
+      />
+    </div>
+    <div class="col-sm-3">
+      <input
+        type="number"
+        id="thickness"
+        [(ngModel)]="k.thickness"
+        class="form-control"
+        (change)="onChangeThicness(k)"
+      />
+    </div>
+    <div class="col-sm-3">
+      <input
+        type="number"
+        id="mass"
+        [disabled]="true"
+        [(ngModel)]="k.mass"
+        class="form-control"
+      />
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-sm-2">
-      <label for="khoangN">Khoang : </label>
+  <!-- <app-khoang *ngFor="let k of khoang" [khoang]="k"></app-khoang> -->
+</div>
+
+<div
+  class="row"
+  *ngIf="siloBody.totalMass && siloBody.cone.mass && totalKhoangMass"
+>
+  <div class="col-md-12">
+    <hr />
+    <div class="col-sm-3">
+      <p><strong>Tổng khối lương thân:</strong> {{ siloBody.totalMass }} kg</p>
     </div>
-    <div class="col-sm-4">
-      <input type="number" id="height" class="form-control" />
+    <div class="col-sm-3">
+      <p><strong>Tổng khốilương Cone:</strong> {{ siloBody.cone.mass }} kg</p>
     </div>
-    <div class="col-sm-4">
-      <input type="number" id="thickness" class="form-control" />
+    <div class="col-sm-3">
+      <p><strong>Tổng khối lương khoang: </strong>{{ totalKhoangMass }} kg</p>
     </div>
   </div>
 </div>
